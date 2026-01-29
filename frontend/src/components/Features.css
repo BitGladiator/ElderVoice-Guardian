@@ -6,10 +6,20 @@
 .section-header {
     text-align: center;
     margin-bottom: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .section-header h2 {
     color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.section-header .section-label {
+    display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 .features-grid {

@@ -50,8 +50,8 @@ export default function Features() {
         <section className="features" id="features">
             <div className="container">
                 <div className="section-header">
-                    <span className="section-label">CORE FEATURES</span>
                     <h2>Complete care experience</h2>
+                    <span className="section-label">CORE FEATURES</span>
                 </div>
 
                 <div className="features-grid">
