@@ -5,9 +5,6 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-// Connect Database
-connectDB();
-
 // Build allowed origins list
 const allowedOrigins = [
   "http://localhost:5173",
@@ -19,10 +16,8 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (curl, mobile, Vercel health checks)
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) return callback(null, true);
-    // Also allow any *.vercel.app subdomain as a safe fallback during development
     if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)) return callback(null, true);
     callback(new Error(`CORS: origin ${origin} not allowed`));
   },
@@ -31,13 +26,31 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-// Handle preflight (OPTIONS) for all routes BEFORE other middleware
 app.options("*", cors(corsOptions));
-
-// Apply CORS to all routes
 app.use(cors(corsOptions));
-
 app.use(express.json());
+
+// Health check — shows env var status without exposing values
+app.get("/health", async (req, res) => {
+  const status = {
+    mongo_uri_set: !!process.env.MONGO_URI,
+    jwt_secret_set: !!process.env.JWT_SECRET,
+    mongo_uri_is_atlas: process.env.MONGO_URI
+      ? process.env.MONGO_URI.includes("mongodb+srv")
+      : false,
+    db_connected: false,
+    db_error: null,
+  };
+
+  try {
+    await connectDB();
+    status.db_connected = true;
+  } catch (err) {
+    status.db_error = err.message;
+  }
+
+  res.json(status);
+});
 
 app.use("/api/auth", require("./routes/auth"));
 
