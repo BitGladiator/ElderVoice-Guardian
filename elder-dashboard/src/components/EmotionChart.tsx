@@ -38,7 +38,7 @@ export default function EmotionChart({
     ];
   }
 
-  // 🔥 Now calculate AFTER moodData exists
+
   const total = moodData.reduce((sum, item) => sum + item.value, 0);
 
   const highest = moodData.reduce((prev, current) =>
@@ -64,7 +64,8 @@ export default function EmotionChart({
     <Box
   sx={{
     width: "100%",
-    minheight: 200,   // 🔥 give FIXED HEIGHT
+    minheight: 200,   
+
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

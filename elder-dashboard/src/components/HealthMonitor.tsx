@@ -29,7 +29,6 @@ type Props = {
 export default function HealthMonitor({ vitals }: Props) {
   const [history, setHistory] = useState<any[]>([]);
 
-  // Add new vitals to history whenever vitals change
   useEffect(() => {
     setHistory((prev) => {
       const updated = [
@@ -56,7 +55,7 @@ export default function HealthMonitor({ vitals }: Props) {
     <Box
   sx={{
     width: "100%",
-    minHeight: 260,   // 🔥 IMPORTANT (minHeight works better than height)
+    minHeight: 260,  
   }}
 >
   <ResponsiveContainer width="100%" height={200}>
