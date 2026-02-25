@@ -18,7 +18,7 @@ const corsOptions = {
     origin: (origin, callback) => {
         if (!origin) return callback(null, true);
         if (allowedOrigins.includes(origin)) return callback(null, true);
-      
+
         if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin))
             return callback(null, true);
         callback(new Error(`CORS: origin ${origin} not allowed`));
@@ -28,8 +28,7 @@ const corsOptions = {
     allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-// Handle preflight
-app.options("*", cors(corsOptions));
+// Preflight is handled by vercel.json -> so we just apply CORS middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -59,5 +58,5 @@ app.get("/", (req, res) => {
     res.send("ElderVoice Guardian Backend is running");
 });
 
-// Export for Vercel serverless — do NOT call app.listen() here
+
 module.exports = app;
