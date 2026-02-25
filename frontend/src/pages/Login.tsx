@@ -1,11 +1,12 @@
 import { useState, FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './auth.css'
 
+const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL as string
+
 export default function Login() {
     const { login } = useAuth()
-    const navigate = useNavigate()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -18,7 +19,7 @@ export default function Login() {
         setLoading(true)
         try {
             await login(email, password)
-            navigate('/dashboard')
+            window.location.href = DASHBOARD_URL
         } catch (err: unknown) {
             const axiosErr = err as { response?: { data?: { message?: string } } }
             setError(axiosErr?.response?.data?.message ?? 'Something went wrong. Please try again.')

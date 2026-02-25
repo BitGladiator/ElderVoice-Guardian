@@ -19,6 +19,8 @@ export default function Navbar() {
 
     const handleLogout = () => {
         logout()
+        localStorage.removeItem('ev_token')
+        localStorage.removeItem('ev_user')
         navigate('/login')
     }
 
@@ -43,7 +45,7 @@ export default function Navbar() {
 
                         {user ? (
                             <>
-                                <Link to="/dashboard" className="btn-dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
+                                <a href={import.meta.env.VITE_DASHBOARD_URL} className="btn-dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</a>
                                 <button className="btn-logout-nav" onClick={handleLogout}>Logout</button>
                             </>
                         ) : (
