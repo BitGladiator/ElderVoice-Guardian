@@ -1,4 +1,8 @@
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './components/ProtectedRoute'
+
+// Landing page sections
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -7,7 +11,14 @@ import Stats from './components/Stats'
 import Testimonials from './components/Testimonials'
 import Footer from './components/Footer'
 
-function App() {
+// Auth pages
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
+
+import './App.css'
+
+function LandingPage() {
     return (
         <div className="app">
             <Navbar />
@@ -20,6 +31,28 @@ function App() {
             </main>
             <Footer />
         </div>
+    )
+}
+
+function App() {
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route
+                        path="/dashboard"
+                        element={
+                            <ProtectedRoute>
+                                <Dashboard />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
     )
 }
 

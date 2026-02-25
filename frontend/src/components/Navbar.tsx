@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import './Navbar.css'
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const { user, logout } = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -12,6 +16,11 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
+    const handleLogout = () => {
+        logout()
+        navigate('/login')
+    }
 
     return (
         <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
@@ -31,7 +40,18 @@ export default function Navbar() {
                         <a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a>
                         <a href="#impact" onClick={() => setIsMenuOpen(false)}>Impact</a>
                         <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
-                        <button className="btn-register">Get Started</button>
+
+                        {user ? (
+                            <>
+                                <Link to="/dashboard" className="btn-dashboard" onClick={() => setIsMenuOpen(false)}>Dashboard</Link>
+                                <button className="btn-logout-nav" onClick={handleLogout}>Logout</button>
+                            </>
+                        ) : (
+                            <>
+                                <Link to="/login" className="btn-login-nav" onClick={() => setIsMenuOpen(false)}>Login</Link>
+                                <Link to="/signup" className="btn-register" onClick={() => setIsMenuOpen(false)}>Get Started</Link>
+                            </>
+                        )}
                     </div>
 
                     <button

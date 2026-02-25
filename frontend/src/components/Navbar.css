@@ -69,21 +69,100 @@
     color: var(--accent-yellow);
 }
 
-.btn-register {
+.btn-register,
+.btn-register:is(a) {
     padding: 0.75rem 1.75rem;
     background: var(--color-primary);
-    color: white;
+    color: white !important;
     border-radius: var(--radius-full);
     font-weight: 600;
     font-size: 0.938rem;
+    text-decoration: none;
     transition: all var(--transition-normal);
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 
 .btn-register:hover {
     background: var(--color-secondary);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+    color: white !important;
+}
+
+.btn-login-nav,
+.btn-login-nav:is(a) {
+    padding: 0.625rem 1.25rem;
+    background: transparent;
+    color: white !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.938rem;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    margin-left: 0.5rem;
+}
+
+.btn-login-nav:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: white;
+    color: white !important;
+}
+
+.navbar.scrolled .btn-login-nav {
+    color: var(--color-primary) !important;
+    border-color: rgba(74, 25, 66, 0.4);
+}
+
+.navbar.scrolled .btn-login-nav:hover {
+    background: rgba(74, 25, 66, 0.07);
+    border-color: var(--color-primary);
+}
+
+.btn-dashboard,
+.btn-dashboard:is(a) {
+    padding: 0.625rem 1.25rem;
+    background: transparent;
+    color: white !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.938rem;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    margin-left: 0.5rem;
+}
+
+.btn-dashboard:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: white;
+}
+
+.navbar.scrolled .btn-dashboard {
+    color: var(--color-primary) !important;
+    border-color: rgba(74, 25, 66, 0.4);
+}
+
+.navbar.scrolled .btn-dashboard:hover {
+    background: rgba(74, 25, 66, 0.07);
+}
+
+.btn-logout-nav {
+    padding: 0.625rem 1.25rem;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.938rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    margin-left: 0.5rem;
+}
+
+.btn-logout-nav:hover {
+    background: var(--color-secondary);
+    transform: translateY(-1px);
 }
 
 .mobile-menu-toggle {
