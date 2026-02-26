@@ -28,6 +28,7 @@ import TopStats from "../components/TopStats";
 import HealthMonitor from "../components/HealthMonitor";
 import EmotionChart from "../components/EmotionChart";
 import PatientProfile from "../components/PatientProfile";
+import AIAssistant from "../components/AIAssistant";
 import { useEffect, useRef } from "react";
 
 export default function DashboardPage({
@@ -175,6 +176,11 @@ export default function DashboardPage({
           </div>
         </div>
 
+        {/* ── AI ASSISTANT ROW (FULL WIDTH) ── */}
+        <div className="section-gap">
+          <AIAssistant />
+        </div>
+
         {/* ── ALERTS + EMOTION ROW ── */}
         <div className="db-grid-3 section-gap" ref={alertRef}>
 
@@ -250,20 +256,22 @@ export default function DashboardPage({
           </div>
         </div>
 
-        {/* ── PATIENT PROFILE ── */}
-        <div className="card section-gap">
-          <div className="card-title">
-            <span className="card-title-icon">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-            </span>
-            Patient Profile
+        {/* ── PATIENT PROFILE & AI ROW ── */}
+        <div className="db-grid section-gap">
+          <div className="card">
+            <div className="card-title">
+              <span className="card-title-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+              </span>
+              Patient Profile
+            </div>
+            <PatientProfile
+              name={patient.name}
+              age={patient.age}
+              condition={patient.condition}
+              caregiver={patient.caregiver}
+            />
           </div>
-          <PatientProfile
-            name={patient.name}
-            age={patient.age}
-            condition={patient.condition}
-            caregiver={patient.caregiver}
-          />
         </div>
 
       </main>
