@@ -53,6 +53,7 @@ app.get("/health", async (req, res) => {
 });
 
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/ai", require("./routes/ai"));
 
 app.get("/", (req, res) => {
   res.send("ElderVoice Guardian Backend is running");
